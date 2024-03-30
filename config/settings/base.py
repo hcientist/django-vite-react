@@ -83,6 +83,7 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.mfa",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.canvas",
 ]
 
 LOCAL_APPS = [
@@ -107,7 +108,10 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "users:redirect"
+# LOGIN_REDIRECT_URL = "users:redirect"
+
+# changing per https://learndjango.com/tutorials/django-allauth-tutorial
+LOGIN_REDIRECT_URL = "/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = "account_login"
 
@@ -274,7 +278,7 @@ ACCOUNT_AUTHENTICATION_METHOD = "username"
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_EMAIL_REQUIRED = True
 # https://docs.allauth.org/en/latest/account/configuration.html
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_ADAPTER = "tictactoe.users.adapters.AccountAdapter"
 # https://docs.allauth.org/en/latest/account/forms.html
@@ -284,6 +288,18 @@ SOCIALACCOUNT_ADAPTER = "tictactoe.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "tictactoe.users.forms.UserSocialSignupForm"}
 
+SOCIALACCOUNT_PROVIDERS = {
+        'canvas': {
+            'SCOPE': [
+                "url:GET|/api/v1/accounts/:account_id/terms",
+                "url:GET|/api/v1/courses/:course_id/enrollments",
+                "url:GET|/api/v1/sections/:section_id/enrollments",
+                "url:GET|/api/v1/users/:user_id/enrollments",
+                "url:GET|/api/v1/courses/:course_id/sections",
+                "url:GET|/api/v1/users/:user_id/profile"
+                ]
+        }
+    }
 
 # Your stuff...
 # ------------------------------------------------------------------------------
