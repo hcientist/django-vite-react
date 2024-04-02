@@ -89,6 +89,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "tictactoe.users",
     # Your stuff: custom apps go here
+    # "tictactoe.canvas",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -287,7 +288,7 @@ ACCOUNT_FORMS = {"signup": "tictactoe.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "tictactoe.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "tictactoe.users.forms.UserSocialSignupForm"}
-
+SOCIALACCOUNT_STORE_TOKENS = True
 SOCIALACCOUNT_PROVIDERS = {
         'canvas': {
             'SCOPE': [
@@ -296,7 +297,8 @@ SOCIALACCOUNT_PROVIDERS = {
                 "url:GET|/api/v1/sections/:section_id/enrollments",
                 "url:GET|/api/v1/users/:user_id/enrollments",
                 "url:GET|/api/v1/courses/:course_id/sections",
-                "url:GET|/api/v1/users/:user_id/profile"
+                "url:GET|/api/v1/users/:user_id/profile",
+                "url:GET|/api/v1/courses"
                 ]
         }
     }
